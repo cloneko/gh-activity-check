@@ -1,5 +1,6 @@
 import ghActivity
 from datetime import datetime
+import boto
 
 gh = ghActivity.ghActivity()
 feed = gh.getFeedById('s14006')
