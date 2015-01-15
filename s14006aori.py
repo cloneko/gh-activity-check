@@ -1,6 +1,8 @@
 import ghActivity
+import sys
 from datetime import datetime
-import boto
+from boto.ses.connection import SESConnection
+
 
 gh = ghActivity.ghActivity()
 feed = gh.getFeedById('s14006')
@@ -12,4 +14,5 @@ for entry in feed:
     break
 
 if latest: 
-  print(latest) 
+  conn = SESConnection()
+  conn.send_email(sys.argv[1],'ghActivityTest',latest,[sys.argv[1]]) 
