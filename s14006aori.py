@@ -1,8 +1,10 @@
 import ghActivity
 import sys
+import os
 from datetime import datetime
 from boto.ses.connection import SESConnection
 
+os.environ['TZ'] = 'UTC'
 
 gh = ghActivity.ghActivity()
 feed = gh.getFeedById('s14006')
@@ -14,5 +16,7 @@ for entry in feed:
     break
 
 if latest: 
-  conn = SESConnection()
-  conn.send_email(sys.argv[1],'ghActivityTest',latest,[sys.argv[1]]) 
+  if (datetime.now() - datetime.strptime(latest['updated'],'%Y-%m-%dT%H:%M:%SZ')).days:
+    message = '今日コミットした?'
+    conn = SESConnection()
+    conn.send_email(sys.argv[1],'ghActivityTest',message,[sys.argv[1]]) 
