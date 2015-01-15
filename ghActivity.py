@@ -20,17 +20,4 @@ class ghActivity:
       title   = entry.find('{http://www.w3.org/2005/Atom}title').text
       update.append({'updated':updated,'title':title}) 
       
-    return (update)
-
-
-
-
-if __name__ == '__main__':
-  gh = ghActivity() 
-  feed = gh.getFeedById('s14006')
-
-  for entry in feed:
-    if entry['title'].find('s14006/31day') >= 0:
-      print(entry['updated'])
-      break
-  
+    return (update) 
